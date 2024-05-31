@@ -2,6 +2,9 @@
 
 # WEBADMIN INSTALLER, reccomended UPDATE and UPGRADE before execution of script!
 
+# Get user home
+USER_HOME=$(eval echo ~${SUDO_USER})
+
 # Get services
 get_utils() {
 
@@ -31,6 +34,24 @@ get_utils() {
 
 }
 
+config_webpage() {
+    sudo apt install composer -y
+    if [ ! -d /var/www/web-admin ]; then
+        sudo mkdir -v /var/www/web-admin
+    fi;
+    sudo cp -r public/ /var/www/web-admin/
+    sudo cp -r src/ /var/www/web-admin/
+    sudo cp -r composer* /var/www/web-admin/
+    sudo mkdir -v /var/www/web-admin/sessions
+    sudo chown -R www-data:www-data /var/www/web-admin/sessions
+
+    # Install composer dependencies
+    cd /var/www/web-admin
+    composer install
+    cd ${USER_HOME}/web-adminTFG
+}
+
+
 config_apache() {
     echo "Configurando Apache ..."
     sudo cp -v ./installer/webadmin.conf /etc/apache2/sites-available/
@@ -54,27 +75,30 @@ config_apache() {
     sudo systemctl restart apache2.service
 }
 
+config_mysql() {
+    # Install mysql php extension
+    echo ""
+    echo "Configurando MySQL ..."
+    echo ""
+    echo "Instalando extensión de PHP - MySQL"
+    echo ""
+    sudo apt install php-mysql -y
+    
+    # Create MySQL user and database
+    sudo mysql <<EOF
+CREATE USER IF NOT EXISTS 'webadmin'@'localhost' IDENTIFIED BY 'webadmin';
+GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
 
-config_webpage() {
-    sudo apt install composer -y
-    if [ ! -d /var/www/webadmin ]; then
-        sudo mkdir -v /var/www/web-admin
+    # Import database
+    if [ -f "${USER_HOME}/web-adminTFG/installer/database/webadmin.sql" ]; then
+        sudo mysql -u webadmin -pwebadmin < "${USER_HOME}/web-adminTFG/installer/database/webadmin.sql"
+    else
+        echo "El archivo ${USER_HOME}/web-adminTFG/webadmin.sql no se encuentra."
     fi;
-    sudo cp -r public/ /var/www/web-admin/
-    sudo cp -r src/ /var/www/web-admin/
-    sudo cp -r composer* /var/www/web-admin/
 
-    # Install composer dependencies
-    cd /var/www/web-admin
-    composer install
-    cd ~/web-adminTFG
 }
-
-# config_mysql (
-
-# )
-
-
 
 init() {
 cat << "EOF"
