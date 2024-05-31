@@ -99,6 +99,8 @@ EOF
         echo "El archivo ${USER_HOME}/web-adminTFG/webadmin.sql no se encuentra."
     fi;
 
+    sudo systemctl restart apache2.service
+
 }
 
 init() {
