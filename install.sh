@@ -34,6 +34,14 @@ get_utils() {
 config_apache() {
     echo "Configurando Apache ..."
     sudo cp -v ./installer/webadmin.conf /etc/apache2/sites-available/
+    # Creating certs
+    echo "Generando clave privada ..."
+    # Private cert
+    sudo openssl genpkey -algorithm RSA -out /etc/ssl/private/webadmin-self.key -aes256
+    echo ""
+    echo "Firmando certificado ..."
+    sudo openssl req -new -key /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.crt
+    echo ""
     # Ennabling needed apache mods and sites
     sudo a2enmod ssl
     sudo a2enmod php8.1
@@ -44,11 +52,12 @@ config_apache() {
 }
 
 config_webpage() {
-    sudo mkdir -v /var/www/webadmin
-    sudo cp -v public/ /var/www/webadmin/
-    sudo cp -v src/ /var/www/webadmin/
-    sudo cp -v sessions/ /var/www/webadmin/
-    sudo cp -v composer* /var/www/webadmin/
+    if [ ! -d /var/www/webadmin ]; then
+        sudo mkdir -v /var/www/webadmin
+    fi;
+    sudo cp -r public/ /var/www/webadmin/
+    sudo cp -r src/ /var/www/webadmin/
+    sudo cp -r composer* /var/www/webadmin/
 }
 
 # config_mysql (
