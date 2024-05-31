@@ -71,7 +71,7 @@ config_apache() {
     sudo a2enmod ssl
     sudo a2enmod php8.1
     sudo a2enmod rewrite
-
+    sudo a2ensie webadmin.conf
 }
 
 config_mysql() {
