@@ -7,29 +7,72 @@ get_utils() {
 
     if [ ! -d /etc/apache2 ]; then
         echo "Apache no está instalado ..."
-        sudo apt install apache2
+        echo ""
+        sudo apt install apache2 -y
     else
         echo "Apache está instalado"
     fi;
 
     if [ ! -d /etc/mysql ]; then
         echo "MySQL no está instalado ..."
-        sudo apt install mysql-server
+        echo ""
+        sudo apt install mysql-server -y
     else
         echo "MySQL está instalado"
     fi;
 
     if [ ! -d /etc/php ]; then
         echo "PHP no está instalado"
-        sudo apt install php
+        echo ""
+        sudo apt install php -y
     else
         echo "PHP está instalado"
     fi;
 
 }
 
+config_apache() {
+    echo "Configurando Apache ..."
+    sudo cp -v ./installer/webadmin.conf /etc/apache2/sites-available/
+    # Ennabling needed apache mods and sites
+    sudo a2enmod ssl
+    sudo a2enmod php8.1
+    sudo a2enmod rewrite
+    sudo a2ensite webadmin.conf
+    # Restart Apache
+    sudo systemctl restart apache2.service
+}
+
+config_webpage() {
+    sudo mkdir -v /var/www/webadmin
+    sudo cp -v public/ /var/www/webadmin/
+    sudo cp -v src/ /var/www/webadmin/
+    sudo cp -v sessions/ /var/www/webadmin/
+    sudo cp -v composer* /var/www/webadmin/
+}
+
+# config_mysql (
+
+# )
+
+
+
 init() {
+cat << "EOF"
+         /$$      /$$ /$$$$$$$$ /$$$$$$$   /$$$$$$  /$$$$$$$  /$$      /$$ /$$$$$$ /$$   /$$
+        | $$  /$ | $$| $$_____/| $$__  $$ /$$__  $$| $$__  $$| $$$    /$$$|_  $$_/| $$$ | $$
+        | $$ /$$$| $$| $$      | $$  \ $$| $$  \ $$| $$  \ $$| $$$$  /$$$$  | $$  | $$$$| $$
+        | $$/$$ $$ $$| $$$$$   | $$$$$$$ | $$$$$$$$| $$  | $$| $$ $$/$$ $$  | $$  | $$ $$ $$
+        | $$$$_  $$$$| $$__/   | $$__  $$| $$__  $$| $$  | $$| $$  $$$| $$  | $$  | $$  $$$$
+        | $$$/ \  $$$| $$      | $$  \ $$| $$  | $$| $$  | $$| $$\  $ | $$  | $$  | $$\  $$$
+        | $$/   \  $$| $$$$$$$$| $$$$$$$/| $$  | $$| $$$$$$$/| $$ \/  | $$ /$$$$$$| $$ \  $$
+        |__/     \__/|________/|_______/ |__/  |__/|_______/ |__/     |__/|______/|__/  \__/
+EOF
+    echo ""
+    echo "Este instalador va a instalar las siguientes dependencias: Apache, PHP, MySQL, Composer"
     get_utils
+    config_apache
+    config_webpage
 }
 
 init
