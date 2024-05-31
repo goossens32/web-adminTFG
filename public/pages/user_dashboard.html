@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <div class="dashboard-container">
+
+        <div class="configuration-menu">
+            <ul>
+                <li class="nav-item active"><a href="" class="nav-link" data-link="USER" aria-current="page">Usuario</a></li>
+                <li class="nav-item"><a href="" class="nav-link" data-link="SCRIPTS">Scripts</a></li>
+                <li class="nav-item"><a href="" class="nav-link" data-link="SERVERS">Servidor</a></li>
+                {% if userData.usr_admin == 'S' %}
+                    <li class="nav-item"><a href="" class="nav-link" data-link="USER-LIST">Listado de usuarios</a></li>
+                    <li class="nav-item"><a href="" class="nav-link" data-link="LOGS">Logs</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    
+        <section class="page">
+            <iframe id="current-page" src="/configuration/user"></iframe>
+        </section>  
+
+    </div>
+{% endblock %}

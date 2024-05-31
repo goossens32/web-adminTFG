@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="../css/user-configuration.css">
+<div class="user-info-configuration">
+    <h1>Modificar datos personales</h1>
+
+    <form action="/update_user_info" method="POST">
+        <input type="hidden" name="usr_id" value="{{userData.usr_id}}">
+        <label for="usr_name">Nombre de usuario</label>
+        <input type="text" name="usr_name" required>
+        <label for="usr_email">Email</label>
+        <input type="email" name="usr_email" required>
+        <label for="usr_password">Contraseña</label>
+        <input type="password" name="usr_password" required>
+        <div class="admin-container">
+            {% if userData.usr_admin == 'S' %}
+            <label for="usr_admin">Administrador:</label>
+            <input type="checkbox" name="usr_admin" required checked>
+            {% endif %}
+        </div>
+        
+        <button type="submit" name="update_single_user">Guardar</button>
+
+        <p class="logout-warning">* Modificar los datos cerrará la sesión.</p>
+
+    </form>
+
+</div>

@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="../css/user-configuration.css">
+
+{% block content %}
+
+<div class="script-info-configuration">
+    <div class="script-info-list">
+        <h1>Listado de scripts</h1>
+        {% for script in scriptsList %}
+        <div class="script-item">
+            <div style="flex-basis: 90%;">
+                    <input type="hidden" class="script_id_value" value="{{script.scr_id}}">
+                <div style="display: flex; align-items: center; height: 40px;">
+                    <h2 class="script_name_value">{{ script.scr_name }}</h2>
+                    <h2 class="script_type_value" style="margin-left: .2rem;">{{ script.scr_type }}</h2>
+                </div>
+                
+                <p class="script_description_value">{{ script.scr_description }}</p>
+                <p class="script_content_value">{{ script.scr_content }}</p>
+            </div>
+            
+            <div class="buttons">
+                <div class="edit_script_btn" id="{{script.scr_id}}"><button><i class="fa-solid fa-pen"></i></button></div>
+                <form action="/process_script" method="POST">
+                    <input type="hidden" name="scr_id" value="{{script.scr_id}}">
+                    <button type="submit" name="delete_script"><i class="fa-solid fa-trash"></i></button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="editor" class="script-editor">
+        <h1>Editor</h1>
+        <form action="/process_script" method="POST">
+
+            <input type="hidden" name="scr_id" id="input_scr_id">
+            <div style="display: flex;">
+                <div style="display: flex; flex-direction: column;">
+                    <label for="">Nombre</label>
+                    <input type="text" name="scr_name" id="input_scr_name" required style="width: 300px;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label for="" style="margin-left: .4rem;">Extensión</label>
+                    <input type="text" name="scr_type" id="input_scr_type" required style="width: 75px; margin-left: .4rem;">
+
+                </div>
+                
+            </div>
+        
+            <label for="">Descripción</label>
+            <input type="text" name="scr_description" id="input_scr_description">
+
+            <label for="">Editor</label>
+            <textarea name="scr_content" cols="30" rows="10" id="input_scr_content" required>{{script.scr_content}}</textarea>
+            
+            <div class="script-button-container">
+                <button type="submit" name="update_script" style="margin-right: 1rem;">Guardar cambios</button>
+                <button id="cancel_btn" class="cancel_btn">Cancelar</button>
+            </div>
+            
+        </form>
+        
+        
+
+    </div>
+</div>
+
+<script defer src="../js/editor.js"></script>
+
+{% endblock %}

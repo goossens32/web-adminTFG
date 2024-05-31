@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../css/user-configuration.css">
+
+{% block content %}
+
+<div class="logs-list-container">
+    <h1>Logs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: auto;">Nº</th>
+                <th style="width: 150px;">Usuario</th>
+                <th style="width: 220px;">Servidor</th>
+                <th style="width: 140px;">Script</th>
+                <th style="width: 150px;">Acción</th>
+                <th style="width: 200px;">Fecha y hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logsList %}
+                <tr>
+                    <td class="tble-log-index"><p>{{loop.index}}</p></td>
+                    <td class="tble-log-user"><p>{{log.usr_name}}</p></td>
+                    <td class="tble-log-hostname"><p>{{log.ser_hostname}}</p></td>
+                    <td class="tble-log-scrname"><p>{{log.scr_name}}</p></td>
+                    <td class="tble-log-action"><p>{{log.log_action}}</p></td>
+                    <td class="tble-log-timestamp"><p>{{log.log_timestamp}}</p></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+        
+
+        
+        
+        
+        
+
+
+</div>
+
+{% endblock %}

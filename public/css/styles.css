@@ -1,0 +1,44 @@
+/* FontAwesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+
+/* GoogleFonts - font-family: 'Roboto', 'Times New Roman';*/ 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    color: var(--font);
+}
+
+body {
+    background-color: var(--background);
+}
+
+main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 95%;
+    min-height: calc(920px - 4rem - 75px - 54px);
+    margin: 2rem auto;
+}
+
+a {text-decoration: none;}
+ul, li {list-style-type: none;}
+
+/* Colour palette */
+:root {
+    --font: #EEEEEE;
+    --DarkBlue: #222831;
+    --background: #444952;
+    --container:#515458;
+    --item-bckg: #171b20;
+    --hover: #057379;
+    --Teal: #00ADB5;
+    --TealSecondary: #2fa4aa;
+    --button: #00666b;
+    --buttonSecondary: #157a80;
+    
+}

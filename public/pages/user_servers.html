@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="../css/user-configuration.css">
+
+{% block content %}
+
+<div class="server-info-configuration">
+    <div class="server-info-list">
+        <h1>Lista de servidores</h1>
+        {% for server in serversList %}
+        <div class="server-item">
+            <div style="flex-basis: 90%;">
+                <input type="hidden" id="server_id_value" value="{{server.ser_id}}">
+                <h2 id="server_hostname_value">{{ server.ser_hostname }}</h2>
+                <p id="server_ipAddress_value">{{ server.ser_ipAddress }}</p>
+                <p id="server_description_value">{{ server.ser_description }}</p>
+            </div>
+            
+            <div class="buttons">
+                <div class="edit_server_btn" id="{{server.ser_id}}"><button><i class="fa-solid fa-pen"></i></button></div>
+                <form action="/process_server" method="POST">
+                    <input type="hidden" name="ser_id" value="{{server.ser_id}}">
+                    <button type="submit" name="delete_server"><i class="fa-solid fa-trash cancel_btn"></i></button>
+                </form>
+            </div>
+
+        </div>
+        {% endfor %}
+    
+    </div>
+
+    <div id="editor" class="server-editor">
+        <h1>Editor</h1>
+        <form action="/process_server" method="POST">
+            <input type="hidden" name="ser_id" id="input_ser_id">
+            <label for="">Hostname</label>
+            <input type="text" name="ser_hostname" id="input_ser_hostname" required>
+            <label for="">Dirección IP</label>
+            <input type="text" name="ser_ipAddress" id="input_ser_ipaddress" required>
+            <label for="">Descripción</label>
+            <input type="text" name="ser_description" id="input_ser_description" required>
+
+            <div class="server-button-container">
+                <button type="submit" name="update_server" class="server-update-btn">Guardar cambios</button>
+                <button id="cancel_btn" class="cancel_btn">Cancelar</button>
+            </div>
+            
+        </form>
+        
+
+    </div>
+
+</div>
+
+<script defer src="../js/editor.js"></script>
+
+{% endblock %}

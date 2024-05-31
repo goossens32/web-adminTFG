@@ -1,0 +1,167 @@
+/* GENERAL FORM STYLES */
+/* Buttons */
+button {
+    background-color: var(--button);
+    border: none;
+    transition: .2s ease;
+
+    &:hover {cursor: pointer; color: var(--DarkBlue);}
+}
+.login-container button {
+    width: 30%;
+    padding: .4rem 0rem;
+}
+/* Inputs */
+input {
+    border: none;
+    color: var(--DarkBlue);
+}
+/* Selects */
+select{
+    color: var(--DarkBlue);
+}
+
+
+/* LOGIN FORM */
+.login-container {
+    height: 250px;
+}
+.login-container form {
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.login-container form input{
+    width: 60%;
+    margin: 0 auto;
+    padding: .4rem;
+    margin-bottom: 1rem;
+    background-color: var(--background);
+    color: var(--font);
+}
+
+
+/* SEND SCRIPT FORM */
+.send-script-container {
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    background-color: var(--Teal);
+}
+.send-script-options-container {
+    width: 100%;
+}
+.send-script-container, .send-script-options-container, .send-script-container form, .send-script-select, .send-script-credentials-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.send-script-container button {
+    width: 100px;
+    padding: .3rem .2rem;
+}
+
+.send-script-container select, .send-script-container input {
+    width: 150px;
+    padding: .3rem .2rem;
+    border: none;
+}
+.send-script-container i {
+    margin-right: .7rem;
+    color: var(--DarkBlue);
+    font-size: 24px;
+}
+.send-script-select select:first-child, .send-script-credentials-container input {margin-right: .5rem;}
+/* Info popup */
+.fa-circle-question {
+    cursor: pointer;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltiptext {
+    position: absolute;
+    font-size: 14px;
+    padding: .5rem;
+    top: 20px;
+    width: 308px;
+    background-color: rgba(0, 0, 0, 0.644);
+    box-shadow: 10px 10px 23px -6px rgb(46, 46, 46);
+}
+
+/* UPLOAD SCRIPT FORM */
+.upload-script-container {
+    height: 50px;
+    border-bottom: 5px solid var(--Teal);
+    padding-bottom: 1rem;
+    margin-right: 2rem;
+
+    display: flex;
+    justify-content: right;
+}
+.upload-script-container button {
+    width: 100px;
+    margin-right: 1rem;
+    padding: .3rem .2rem;
+}
+.upload-script-container i {
+    margin-right: .7rem;
+    font-size: 24px;
+    color: var(--Teal);
+}
+.upload-script-container form input {
+    color: var(--font);
+    padding: .3rem .2rem;
+    border: none;
+}
+
+/* ADD SERVER FORM */
+.add-server-form {
+    position: absolute;
+    width: 300px;
+    right: 80px;
+    top: 250px;
+
+    gap: 1rem;
+    margin: 0 2rem;
+    padding-top: 1rem;
+    background-color: var(--item-bckg);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 10px 10px 23px -6px rgb(46, 46, 46);
+}
+.add-server-form h2{
+    margin: 1rem auto 0 auto;
+    padding: 0 2rem;
+}
+.add-server-form input {
+    width: 80%;
+    color: var(--font);
+    background-color: var(--DarkBlue);
+    padding: .3rem .2rem;
+    border: none;
+    margin: 1rem auto;
+
+    display: flex;
+    justify-content: center;
+
+}
+.add-server-button-container {
+    margin: 1.5rem auto 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#add-server-btn {
+    width: 100px;
+    padding: .3rem .2rem;
+    margin: 0 auto;
+    background-color: var(--buttonSecondary);
+}

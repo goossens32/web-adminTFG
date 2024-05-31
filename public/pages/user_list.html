@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="../css/user-configuration.css">
+
+{% block content %}
+<div class="user-list-container">
+    <div style="flex-basis: 50%;">
+        <h1>Listado de usuarios</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Nº</th>
+                    <th>Nombre de usuario</th>
+                    <th>Email</th>
+                    <th style="text-align: center;">Admin</th>
+                    <th style="text-align: center;">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in userList %}
+                    <tr>
+                        <input type="hidden" value="{{user.usr_id}}" id="usr_id">
+                        <td class="tble-index">{{loop.index}}</td>
+                        <td class="tble-username">{{user.usr_name}}</td>
+                        <td class="tble-email">{{user.usr_email}}</td>
+                        <td class="tble-admin">
+                            {% if (user.usr_admin == 'S')%}
+                                <input type="hidden" value="{{user.usr_admin}}">
+                                <i class="fa-solid fa-user-shield"></i>
+                            {% endif %}
+                        </td>
+                        <td class="tble-actions">
+                            <div class="user-list-buttons-container">
+                                <button class="edit_user_btn"><i class="fa-solid fa-pen"></i></button>
+                                <form action="/update_user_info" method="POST">
+                                    <input type="hidden" value="{{user.usr_id}}" name="usr_id">
+                                    <!-- No se puede eliminar al usuario webadmin -->
+                                    {% if user.usr_name != "webadmin" and user.usr_id != currentUserID %}
+                                        <button name="delete_user" class="delete-user-btn"><i class="fa-solid fa-trash"></i></button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+    
+    <div class="edit-user-form">
+        <h1>Crear / Modificar usuario</h1>
+        <form action="/update_user_info" method="POST" id="user-list-form">
+            <input type="hidden" name="usr_id" id="input_usr_id">
+            <label for="usr_name">Nombre de usuario</label>
+            <input type="text" name="usr_name" required id="input_usr_name">
+            <label for="usr_email">Email</label>
+            <input type="email" name="usr_email" required id="input_usr_email">
+            <label for="usr_password">Contraseña</label>
+            <input type="password" name="usr_password" required>
+            <div class="admin-container">
+                <label for="usr_admin">Administrador</label>
+                <input type="checkbox" name="usr_admin" id="input_usr_admin" checked style="width: 40px;">
+            </div>
+
+            <div class="edit-user-form-buttons-container">
+                <button type="submit" name="create_user" id="user-form-button" style="margin-right: 1rem;">Crear usuario</button>
+                <button id="user-form-cancel-button" class="cancel_btn">Cancelar</button>
+            </div>
+            
+        </form>
+            
+            
+    </div>
+    
+</div>
+
+<script defer src="../js/editor.js"></script>
+{% endblock %}

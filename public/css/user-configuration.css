@@ -1,0 +1,255 @@
+/* FontAwesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+/* GoogleFonts - font-family: 'Roboto', 'Times New Roman';*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.user-info-configuration, .script-info-configuration, .server-info-configuration, .user-list-container, .logs-list-container {
+    font-family: 'Roboto';
+    color: #EEEEEE;
+    margin: 3.3rem 3rem;
+}
+h1 {color: #00ADB5;}
+
+button {
+    background-color: #00666b;
+    border: none;
+    transition: .2s ease;
+    width: 150px;
+    padding: .3rem 0rem;
+
+    &:hover {cursor: pointer; color: #EEEEEE;}
+}
+.cancel_btn {
+    background-color: rgb(196, 39, 39);
+    &:hover {
+        cursor: pointer;
+        color: #EEEEEE;
+    }
+}
+
+/* USER CONFIGURATION PAGE */
+.user-info-configuration form {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.admin-container {display: flex;}
+.admin-container input {margin-left: 1rem; &:hover{cursor: pointer;}}
+.user-info-configuration label {
+    margin-bottom: .4rem;
+}
+.user-info-configuration input {
+    margin-bottom: 1rem;
+    color: #EEEEEE;
+    background-color: #222831;
+
+    padding: .3rem .2rem;
+    border: none;
+}
+.user-info-configuration button {
+    margin: 1rem auto;
+}
+
+/* USER LIST PAGE */
+.user-list-container {
+    display: flex;
+    justify-content: space-between;
+}
+.user-list-container table {
+    border-collapse: collapse;
+    background-color: #222831;
+    color: #EEEEEE;
+}
+.user-list-container table thead tr{
+    color: #EEEEEE;
+    background-color: #00666b;
+}
+.user-list-container table thead tr th {padding: .7rem; text-align: left;}
+/* table columns */
+.tble-index {
+    text-align: center;
+    width: 50px;
+}
+.tble-username {width: 240px; text-align: left; padding: .5rem .7rem;}
+.tble-email {width: 220px; text-align: left; padding: .5rem .7rem;}
+.tble-admin {text-align: center; width: 80px;}
+.tble-actions {width: 100px;}
+
+.user-list-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+.user-list-buttons-container form {margin-bottom: 0;}
+.user-list-buttons-container form button, .script-item form button, .server-item form button{
+    background-color: rgb(196, 39, 39);
+}
+.delete-user-btn {margin-left: .5rem;}
+.user-list-buttons-container button, .script-item button, .server-info-list button {
+    /* margin: .3rem .5rem .3rem 0; */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.edit-user-form {flex-basis: 35%;}
+.edit-user-form form {
+    display: flex;
+    flex-direction: column;
+}
+.edit-user-form label {
+    margin-bottom: .5rem;
+}
+.edit-user-form input {
+    width: 70%;
+    margin-bottom: 1rem;
+    color: #EEEEEE;
+    background-color: #222831;
+
+    padding: .3rem .2rem;
+    border: none;
+}
+.edit-user-form-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 2rem;
+}
+
+/* SCRIPTS LIST PAGE */
+.script-info-configuration {display: flex;  }
+.script-info-list, .server-info-list {max-height: 654.667px; overflow: auto; margin-right: 5rem;}
+.server-info-list {width: 700px;}
+.script-info-list {min-width: 700px; max-width: 700px;}
+
+.script-item {
+    width: 93%;
+    max-height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #222831;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.script_content_value {
+    min-height: 60px;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: unset;
+}
+.script_description_value {min-height: 20px;}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.buttons form {margin-bottom: 0;}
+.edit_script_btn, .edit_server_btn {margin-bottom: 1rem;}
+
+#editor {flex-basis: 40%;}
+#editor form {
+    display: flex;
+    flex-direction: column;
+}
+#editor form input {
+    color: #EEEEEE;
+    background-color: #222831;
+
+    padding: .3rem .2rem;
+    border: none;
+}
+#editor form label {margin-bottom: .5rem;}
+#editor form input {margin-bottom: 1rem;}
+.editor-script {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+#editor form textarea {
+    border: none;
+    color: #EEEEEE;
+    background-color:#222831;
+    max-width: 567.2px;
+    min-width: 567.2px;
+    min-height: 350px;
+    max-height: 350px;
+    overflow: auto;
+}
+.script-button-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* SERVERS LIST PAGE */
+.server-info-configuration {
+    display: flex;
+    justify-content: space-between;
+}
+.server-item {
+    width: 500px;
+    background-color: #222831;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+#server_hostname_value {margin: 0;}
+#server_description_value {
+    max-height: 60px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: unset ;
+}
+.server-editor input {
+    width: 70%;
+}
+.server-button-container {
+    display: flex;
+    align-items: center;
+
+    margin-top: 2rem;
+}
+.server-update-btn {margin-right: 1rem;}
+
+/* LOGS LIST PAGE */
+.logs-list-container table {
+    border-collapse: collapse;
+    background-color: #222831;
+    color: #EEEEEE;
+    display: block;
+    max-height: 620px;
+    max-width: 1000px;
+    overflow: auto;
+}
+.logs-list-container table thead tr{
+    color: #EEEEEE;
+    background-color: #00666b;
+}
+.logs-list-container table thead tr{
+    position: sticky;
+    top: 0;
+}
+
+.logs-list-container table thead tr th {padding: .7rem; text-align: left;}
+/* table columns */
+.tble-log-index {
+    text-align: center;
+    width: 50px;
+}
+.tble-log-user {width: 100px; text-align: left; padding: .5rem .7rem;}
+.tble-log-hostname {width: 220px; text-align: left; padding: .5rem .7rem;}
+.tble-log-scrname {text-align: left; width: 140px; padding: .5rem .7rem;}
+.tble-log-action {width: 150px; text-align: left; padding: .5rem .7rem;}
+.tble-log-timestamp {width: 200px;}
+
+.logout-warning {
+    margin-top: 2rem;
+    font-style: italic;
+    color: #5c6c83;
+}

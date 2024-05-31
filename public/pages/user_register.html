@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+    <form action="/process_register" method="POST">
+        <label for="usr_name">Nombre de usuario</label>
+        <input type="text" name="usr_name" required>
+
+        <label for="usr_email">Correo electrónico</label>
+        <input type="email" name="usr_email">
+
+        <label for="usr_password">Contraseña</label>
+        <input type="password" name="usr_password">
+
+        <label for="usr_admin">Administrador</label>
+        <input type="checkbox" name="usr_admin">
+
+        <button type="submit">Registrar usuario</button>
+    </form>
+
+{% endblock %}

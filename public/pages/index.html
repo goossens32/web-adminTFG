@@ -1,0 +1,125 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<div class="send-script-container">
+        <div class="send-script-options-container">
+            <form action="/file_sender" method="POST">
+                <div class="send-script-select">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <select name="scriptSelect" id="scriptSelect" style="margin-right: .5rem;">
+                        {% for script in scriptsList %}
+                            <option value="{{ script.scr_id }}"><h1>{{ script.scr_name }}</h1></option>
+                        {% endfor %}
+                    </select>
+                
+                    <select name="serverSelect" id="serverSelect">
+                        {% for server in serversList %}
+                            <option value="{{ server.ser_id }}"><h1>{{ server.ser_hostname }}</h1> <h1>{{ server.ser_ipAddress }}</h1></option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="send-script-credentials-container">
+                    <i class="fa-regular fa-circle-question" style="margin-left: 1rem;"></i>
+                    <div class="tooltip">
+                        <span class="tooltiptext" style="display: none;">Si no se ha configurado una clave pública es necesario introducir las credenciales del servidor remoto.</span>
+                    </div>
+                    <input type="text" name="user" placeholder="Usuario"  required>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                </div>    
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+</div>
+
+
+
+<main>
+
+    <section class="script-container">
+
+        <div class="script-container-title">
+            <h1>Lista de scripts</h1>
+
+            <div class="upload-script-container">
+                <form action="/process_script" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="script_file" required accept=".css,.js,.php,.sh,.sql,.npm,.java,.git,.c,.C,.html,.json,.py,.rb">
+                    <button type="submit">Subir Script</button>
+                </form>
+                <i class="fa-solid fa-upload"></i>
+            </div>
+        
+        </div>
+
+
+        <div class="script-grid">
+            {% for script in scriptsList %}
+                <div class="script-item">
+                    <img src="../images/pl-logos/{{script.scr_type}}.svg" alt="">
+                    <div class="script-content">
+                        <h2>{{ script.scr_name }}.{{script.scr_type}}</h2>
+                        <p>{{ script.scr_description }}</p>
+                    </div>
+                    <i class="fa-regular fa-eye"></i>
+
+                    <div class="script-view-container" style="display: none;">
+                        <div class="close-btn-div"><button id="close-btn"><i class="fa-solid fa-xmark"></i></button></div>
+                        <pre class="languaje-{{script.scr_type}}">{{ script.scr_content}}</pre>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    
+    </section>
+
+    <section class="server-container">
+        <div class="server-container-title">
+            <h1>Lista de servidores</h1>
+            <i class="fa-solid fa-circle-plus"></i>
+        </div>
+        
+        <div class="add-server-form" style="display: none;">
+            <h2>Añadir servidor</h2>
+            <form action="/process_server" method="post">
+                    <input type="text" name="ser_hostname" placeholder="Hostname" required>
+                    <input type="text" name="ser_ipAddress" placeholder="Dirección IP" required>
+                    <input type="text" name="ser_description" placeholder="Descripción">
+                    <div class="add-server-button-container"><button type="submit" id="add-server-btn">Añadir</button></div>
+            </form>
+        </div>
+        
+
+        <div class="server-column">
+            {% for server in serversList %}
+                <div class="server-item">
+                    <i class="fa-solid fa-server"></i>
+                    <div class="server-content">
+                        <div class="server-title-information">
+                            <h2>{{ server.ser_hostname }}</h2>
+                            <h3>{{ server.ser_ipAddress }}</h3>
+                        </div>
+
+                        <div class="server-description">
+                            <p>{{ server.ser_description }}</p>
+                        </div>
+                        
+                        <!-- <h1>{{ server.is_active ? 'Active' : 'Inactive'}}</h1> -->
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+
+        
+
+    </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+
+
+{% endblock %}
