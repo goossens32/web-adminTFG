@@ -50,7 +50,6 @@ config_apache() {
     sudo a2enmod ssl
     sudo a2enmod php8.1
     sudo a2enmod rewrite
-    sudo a2ensite webadmin.conf
     # Restart Apache
     sudo systemctl restart apache2.service
 }
@@ -59,15 +58,15 @@ config_apache() {
 config_webpage() {
     sudo apt install composer -y
     if [ ! -d /var/www/webadmin ]; then
-        sudo mkdir -v /var/www/webadmin
+        sudo mkdir -v /var/www/web-admin
     fi;
-    sudo cp -r public/ /var/www/webadmin/
-    sudo cp -r src/ /var/www/webadmin/
-    sudo cp -r composer* /var/www/webadmin/
+    sudo cp -r public/ /var/www/web-admin/
+    sudo cp -r src/ /var/www/web-admin/
+    sudo cp -r composer* /var/www/web-admin/
 
     # Install composer dependencies
     cd /var/www/web-admin
-    sudo composer install -y
+    composer install
     cd ~/web-adminTFG
 }
 
