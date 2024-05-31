@@ -71,8 +71,8 @@ config_apache() {
     sudo a2enmod ssl
     sudo a2enmod php8.1
     sudo a2enmod rewrite
-    # Restart Apache
-    sudo systemctl restart apache2.service
+    sudo a2ensite
+
 }
 
 config_mysql() {
@@ -98,6 +98,14 @@ EOF
         echo "El archivo ${USER_HOME}/web-adminTFG/webadmin.sql no se encuentra."
     fi;
 
+}
+
+inform_user() {
+    echo ""
+    echo "Para acceder ve a https://IP_server"
+    echo ""
+    echo "Por favor cambia la contraseña por defecto una vez hayas entrado."
+    echo "user: webadmin, pass: webadmin"
 }
 
 init() {
