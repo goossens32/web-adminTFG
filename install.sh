@@ -102,6 +102,14 @@ EOF
 
 }
 
+inform_user() {
+    echo ""
+    echo "Para acceder ve a https://IP_server"
+    echo ""
+    echo "Por favor cambia la contraseña por defecto una vez hayas entrado."
+    echo "user: webadmin, pass: webadmin"
+}
+
 init() {
 cat << "EOF"
          /$$      /$$ /$$$$$$$$ /$$$$$$$   /$$$$$$  /$$$$$$$  /$$      /$$ /$$$$$$ /$$   /$$
@@ -123,6 +131,7 @@ EOF
         config_webpage
         config_apache
         config_mysql
+        inform_user
     elif [[ "$key" == "N" || "$key" == "n" ]]; then
         echo ""
         exit 1
