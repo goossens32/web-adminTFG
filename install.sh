@@ -87,8 +87,8 @@ config_mysql() {
     
     # Create MySQL user and database
     sudo mysql <<EOF
-CREATE USER IF NOT EXISTS 'webadmin'@'localhost' IDENTIFIED BY 'webadmin';
-GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'webadmin'@'%' IDENTIFIED BY 'webadmin';
+GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
