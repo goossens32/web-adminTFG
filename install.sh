@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # WEBADMIN INSTALLER, reccomended UPDATE and UPGRADE before execution of script!
 
 # Get user home
