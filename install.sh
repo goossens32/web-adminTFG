@@ -120,6 +120,7 @@ EOF
         get_utils
         config_webpage
         config_apache
+        config_mysql
     elif [[ "$key" == "N" || "$key" == "n" ]]; then
         echo ""
         exit 1
