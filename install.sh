@@ -35,13 +35,17 @@ config_apache() {
     echo "Configurando Apache ..."
     sudo cp -v ./installer/webadmin.conf /etc/apache2/sites-available/
     # Creating certs
-    echo "Generando clave privada ..."
-    # Private cert
-    sudo openssl genpkey -algorithm RSA -out /etc/ssl/private/webadmin-self.key -aes256
-    echo ""
-    echo "Firmando certificado ..."
-    sudo openssl req -new -key /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.crt -subj "/C=ES/ST=Madrid/L=Madrid/O=webadmin.io/CN=webadmin.io"
-    echo ""
+    if [ ! -f /etc/ssl/private/webadmin-self.key ] && [ ! -f /etc/ssl/certs/webadmin-self.crt ]; then
+        echo "Generando clave privada ..."
+        # Private cert
+        sudo openssl genpkey -algorithm RSA -out /etc/ssl/private/webadmin-self.key -aes256
+        echo ""
+        echo "Firmando certificado ..."
+        sudo openssl req -new -key /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.csr -subj "/C=ES/ST=Madrid/L=Madrid/O=webadmin.io/CN=webadmin.io"
+        sudo openssl x509 -req -days 365 -in /etc/ssl/certs/webadmin-self.csr -signkey /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.crt
+        echo ""
+    fi;
+
     # Ennabling needed apache mods and sites
     sudo a2enmod ssl
     sudo a2enmod php8.1
@@ -51,6 +55,7 @@ config_apache() {
     sudo systemctl restart apache2.service
 }
 
+
 config_webpage() {
     if [ ! -d /var/www/webadmin ]; then
         sudo mkdir -v /var/www/webadmin
@@ -58,6 +63,10 @@ config_webpage() {
     sudo cp -r public/ /var/www/webadmin/
     sudo cp -r src/ /var/www/webadmin/
     sudo cp -r composer* /var/www/webadmin/
+
+    # Install composer dependencies
+    cd /var/www/web-admin
+    sudo composer install -y
 }
 
 # config_mysql (
@@ -78,10 +87,23 @@ cat << "EOF"
         |__/     \__/|________/|_______/ |__/  |__/|_______/ |__/     |__/|______/|__/  \__/
 EOF
     echo ""
-    echo "Este instalador va a instalar las siguientes dependencias: Apache, PHP, MySQL, Composer"
-    get_utils
-    config_webpage
-    config_apache
+    echo "Este instalador va a instalar las siguientes dependencias: Apache, PHP, MySQL, Composer."
+    echo "¿Deseas continuar? (Y/n)"
+    read -n1 -s key
+    if [[ "$key" == "Y" || "$key" == "y" ]]; then
+        echo ""
+        get_utils
+        config_webpage
+        config_apache
+    elif [[ "$key" == "N" || "$key" == "n" ]]; then
+        echo ""
+        exit 1
+    else
+        echo ""
+        echo "Opción no válida. Por favor, ejecuta el script de nuevo y presiona 'Y' o 'N'."
+        exit 1
+    fi;
+   
 }
 
 init
