@@ -57,6 +57,7 @@ config_apache() {
 
 
 config_webpage() {
+    sudo apt install composer -y
     if [ ! -d /var/www/webadmin ]; then
         sudo mkdir -v /var/www/webadmin
     fi;
@@ -67,6 +68,7 @@ config_webpage() {
     # Install composer dependencies
     cd /var/www/web-admin
     sudo composer install -y
+    cd ~/web-adminTFG
 }
 
 # config_mysql (
