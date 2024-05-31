@@ -40,7 +40,7 @@ config_apache() {
     sudo openssl genpkey -algorithm RSA -out /etc/ssl/private/webadmin-self.key -aes256
     echo ""
     echo "Firmando certificado ..."
-    sudo openssl req -new -key /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.crt
+    sudo openssl req -new -key /etc/ssl/private/webadmin-self.key -out /etc/ssl/certs/webadmin-self.crt -subj "/C=ES/ST=Madrid/L=Madrid/O=webadmin.io/CN=webadmin.io"
     echo ""
     # Ennabling needed apache mods and sites
     sudo a2enmod ssl
@@ -80,8 +80,8 @@ EOF
     echo ""
     echo "Este instalador va a instalar las siguientes dependencias: Apache, PHP, MySQL, Composer"
     get_utils
-    config_apache
     config_webpage
+    config_apache
 }
 
 init
