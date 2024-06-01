@@ -18,7 +18,11 @@
     <header>
         <div class="logo-container">
             <img src="../images/logo.png" alt="">
-            <a href="/main"><h1>WEB ADMIN</h1></a>
+            {% if title != 'Webadmin - Login' %}
+                <a href="/main"><h1>WEB ADMIN</h1></a>
+            {% else %}
+                <a href=""><h1>WEB ADMIN</h1></a>
+            {% endif %}
         </div>
         
         {% if title != 'Webadmin - Login' %}
