@@ -86,9 +86,14 @@ config_mysql() {
     echo "Instalando extensión de PHP - ssh2"
     echo ""
     sudo apt install php-ssh2 -y
+    # Ask password to user
+    echo ""
+    read -sp "Introduzca la contraseña para el usuario 'webadmin': " MYSQL_PASSWORD
+    echo ""
+    
     # Create MySQL user and database
     sudo mysql <<EOF
-CREATE USER IF NOT EXISTS 'webadmin'@'%' IDENTIFIED BY 'webadmin';
+CREATE USER IF NOT EXISTS 'webadmin'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
