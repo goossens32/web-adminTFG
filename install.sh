@@ -83,12 +83,13 @@ config_mysql() {
     echo "Instalando extensión de PHP - MySQL"
     echo ""
     sudo apt install php-mysql -y
+    echo ""
     echo "Instalando extensión de PHP - ssh2"
     echo ""
     sudo apt install php-ssh2 -y
     # Ask password to user
     echo ""
-    read -sp "Introduzca la contraseña para el usuario 'webadmin': " MYSQL_PASSWORD
+    read -sp "Introduzca la contraseña para el usuario 'webadmin' de MySQL: " MYSQL_PASSWORD
     echo ""
     
     # Create MySQL user and database
@@ -111,10 +112,11 @@ EOF
 
 inform_user() {
     echo ""
-    echo "Para acceder ve a https://IP_server"
+    echo "Para acceder ve a https://IP_SERVER"
     echo ""
     echo "Por favor cambia la contraseña por defecto una vez hayas entrado."
     echo "user: webadmin, pass: webadmin"
+    echo ""
 }
 
 init() {
