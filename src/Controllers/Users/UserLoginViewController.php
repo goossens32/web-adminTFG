@@ -18,7 +18,7 @@ class UserLoginViewController
             die;
         }
         $template = new UserLoginView();
-        $template->setTitle( 'Login' );
+        $template->setTitle( 'Webadmin - Login' );
         $template->render();
         
     }

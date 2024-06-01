@@ -21,7 +21,7 @@ class MainViewController
             $serversList = (new UserRepository())->getServersByUsrID($usrID);
            
             $template = new MainView();
-            $template->setTitle($userData['usr_name']);
+            $template->setTitle('Webadmin -'.' '.$userData['usr_name']);
             $template->setUserData($userData);
             $template->setScripts($scriptsList);
             $template->setServers($serversList);
