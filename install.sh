@@ -83,7 +83,9 @@ config_mysql() {
     echo "Instalando extensión de PHP - MySQL"
     echo ""
     sudo apt install php-mysql -y
-    
+    echo "Instalando extensión de PHP - ssh2"
+    echo ""
+    sudo apt install php-ssh2 -y
     # Create MySQL user and database
     sudo mysql <<EOF
 CREATE USER IF NOT EXISTS 'webadmin'@'%' IDENTIFIED BY 'webadmin';
