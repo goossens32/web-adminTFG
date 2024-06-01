@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # WEBADMIN INSTALLER, reccomended UPDATE and UPGRADE before execution of script!
 
 # Get user home
@@ -71,7 +71,8 @@ config_apache() {
     sudo a2enmod ssl
     sudo a2enmod php8.1
     sudo a2enmod rewrite
-    sudo a2ensie webadmin.conf
+    sudo a2ensite webadmin.conf
+
 }
 
 config_mysql() {
@@ -85,8 +86,8 @@ config_mysql() {
     
     # Create MySQL user and database
     sudo mysql <<EOF
-CREATE USER IF NOT EXISTS 'webadmin'@'localhost' IDENTIFIED BY 'webadmin';
-GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'webadmin'@'%' IDENTIFIED BY 'webadmin';
+GRANT ALL PRIVILEGES ON *.* TO 'webadmin'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
@@ -96,6 +97,8 @@ EOF
     else
         echo "El archivo ${USER_HOME}/web-adminTFG/webadmin.sql no se encuentra."
     fi;
+
+    sudo systemctl restart apache2.service
 
 }
 
@@ -127,6 +130,8 @@ EOF
         get_utils
         config_webpage
         config_apache
+        config_mysql
+        inform_user
     elif [[ "$key" == "N" || "$key" == "n" ]]; then
         echo ""
         exit 1
