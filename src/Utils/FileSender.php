@@ -14,7 +14,7 @@ class FileSender
                 $selectedScriptID = $_POST['scriptSelect'];
 
 
-                if (!isset($_POST['scriptSelect'])) {
+                if (!isset($selectedScriptID)) {
                     print_r("No se ha recibido el ID correctamente");
                 }
             
@@ -34,8 +34,6 @@ class FileSender
             } catch (\Throwable $err) {
                 print_r($err);
                 echo('</br>');
-                echo('</br>');
-                print_r($scriptData);
             }
         }
 
@@ -43,7 +41,7 @@ class FileSender
             try {
                 $selectedServerID = $_POST['serverSelect'];
 
-                if (!isset($_POST['serverSelect'])) {
+                if (!isset($selectedServerID)) {
                     print_r("No se ha recibido el ID correctamente");
                 }
 
@@ -64,8 +62,13 @@ class FileSender
             
             $conn = ssh2_connect($ip, 22);
             $mode = 0755;
-            ssh2_auth_password($conn, 'carlos', 'opnm');
-            ssh2_scp_send($conn, $path, '/home/carlos/' . $name, $mode);
+
+            $user = $_POST['user'];
+            $password = $_POST['password'];
+            $remotePath = "/home/".$user."/";
+
+            ssh2_auth_password($conn, $user, $password);
+            ssh2_scp_send($conn, $path, $remotePath . $name, $mode);
 
         }
 

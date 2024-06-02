@@ -9,13 +9,13 @@
                     <i class="fa-solid fa-paper-plane"></i>
                     <select name="scriptSelect" id="scriptSelect" style="margin-right: .5rem;">
                         {% for script in scriptsList %}
-                            <option value="{{ script.scr_id }}"><h1>{{ script.scr_name }}</h1></option>
+                            <option value="{{ script.scr_id }}" aria-required="true"><h1>{{ script.scr_name }}</h1></option>
                         {% endfor %}
                     </select>
                 
                     <select name="serverSelect" id="serverSelect">
                         {% for server in serversList %}
-                            <option value="{{ server.ser_id }}"><h1>{{ server.ser_hostname }}</h1> <h1>{{ server.ser_ipAddress }}</h1></option>
+                            <option value="{{ server.ser_id }}" aria-required="true"><h1>{{ server.ser_hostname }}</h1> <h1>{{ server.ser_ipAddress }}</h1></option>
                         {% endfor %}
                     </select>
                 </div>
